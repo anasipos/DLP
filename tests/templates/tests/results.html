@@ -1,0 +1,27 @@
+<h1>Results!</h1>
+
+<ol>
+    {% for q in questions %}
+        <li>
+            {{ q.text }}
+            <ol>
+                {% for a in q.answers %}
+                    <li>
+                        {% if a.is_selected %}
+                            <strong>
+                        {% endif %}
+                        {{ a.text }} - Selected: {{ a.is_selected }} - Correct: {{ a.is_correct }}
+                        {% if a.is_selected %}
+                            </strong>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ol>
+        </li>
+    {% endfor %}
+
+</ol>
+
+<div>
+    <a href="{%  url 'tests:test-list' %}" >New test</a>
+</div>

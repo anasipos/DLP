@@ -1,0 +1,8 @@
+{% block content %}
+    <h2>Available Tests</h2>
+    <ul>
+        {% for test in test_list %}
+            <li><a href="{%  url 'tests:start-test' test.id%}">{{ test.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,34 @@
+<h1>Page in Test</h1>
+
+{#<form action="{% url 'tests:user-page' pk=next_page_id %}" method="POST">#}
+<form action='' method="POST">
+    {% csrf_token %}
+    {{ form.management_form }}
+    <ol>
+        {% for userquestion in form %}
+            {{ userquestion.id }}
+            <li><p>{{ userquestion.instance.text }}</p>
+            {% if userquestion.errors %}
+                <strong>{{ userquestion.errors }}</strong>
+            {% endif %}
+
+                {{ userquestion.nested.management_form }}
+                {% if userquestion.nested.error_message %}
+                    <strong>{{ userquestion.nested.error_message }}</strong>
+                {% endif %}
+                <ol>
+                    {% for useranswer in userquestion.nested %}
+                        {{ useranswer.id }}
+                        <li><span>{{ useranswer.is_selected }} {{ useranswer.instance.text }}</span></li>
+                    {% endfor %}
+                </ol>
+            </li>
+        {% endfor %}
+    </ol>
+
+    {% if has_prev %}
+        <input type="submit" name='action' value="Prev"/>
+    {% endif %}
+    <input type="submit" name='action' value="Next"/>
+
+</form>
